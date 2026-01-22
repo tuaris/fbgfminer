@@ -24,7 +24,7 @@ m4_define([lt_age], v_min)
 ##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##
 ##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##
 
-AC_INIT([bfgminer], [v_ver], [luke-jr+bfgminer@utopios.org])
+AC_INIT([fbfgminer], [v_ver], [https://github.com/tuaris/fbfgminer])
 
 AC_PREREQ([2.59c])
 AC_CANONICAL_SYSTEM

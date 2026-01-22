@@ -114,7 +114,7 @@ bool getbit(void *data, uint32_t bitnum)
 }
 
 static inline
-void setbit(void *data, uint32_t bitnum, bool nv)
+void jtag_setbit(void *data, uint32_t bitnum, bool nv)
 {
 	unsigned char *cdata = data;
 	div_t d = div(bitnum, 8);
@@ -160,7 +160,7 @@ bool _jtag_llrw(struct jtag_port *jp, void *buf, size_t bitlength, bool do_read,
 				if (ft232r_read_all(jp->a->ftdi, rbuf, rbufsz) != rbufsz)
 					return false;
 				for (ssize_t j = rbufsz - ((bitspending - 1) * 2); j < rbufsz; j += 2)
-					setbit(data, databitoff++, (rbuf[j] & jp->tdo));
+					jtag_setbit(data, databitoff++, (rbuf[j] & jp->tdo));
 				bitspending = 1;
 				jp->a->bufread = 0;
 			}
@@ -175,8 +175,8 @@ bool _jtag_llrw(struct jtag_port *jp, void *buf, size_t bitlength, bool do_read,
 			return false;
 		--rbufsz;
 		for (ssize_t j = rbufsz - (bitspending * 2); j < rbufsz; j += 2)
-			setbit(data, databitoff++, (rbuf[j] & jp->tdo));
-		setbit(data, databitoff++, (rbuf[rbufsz] & jp->tdo));
+			jtag_setbit(data, databitoff++, (rbuf[j] & jp->tdo));
+		jtag_setbit(data, databitoff++, (rbuf[rbufsz] & jp->tdo));
 		jp->a->bufread = 0;
 		
 		if (stage & 2) {

@@ -1,28 +1,26 @@
-BFGMiner:
-St. Barbara's Faithfully Glorified Mining Initiative Naturally Exceeding Rivals
-or Basically a Freaking Good Miner
+FBFG Miner:
+FreeBSD BFG Miner - A fork of BFGMiner with FreeBSD compatibility patches
 
 This is a multi-threaded, multi-blockchain, multi-pool ASIC, FPGA, GPU and CPU
 miner with dynamic clocking, monitoring, and fanspeed support for bitcoin.
 
-This code is provided entirely free of charge by the programmer in his spare
-time so donations would be greatly appreciated. Please consider donating to the
-address below.
+Based on BFGMiner by Luke Dashjr. Original code provided entirely free of charge.
+Please consider donating to the original author:
 
 Luke-Jr <luke-jr+bfgminer@utopios.org>
 1QATWksNFGeUJCWBrN4g6hGM178Lovm7Wh
 
-DOWNLOADS:
-
-http://luke.dashjr.org/programs/bitcoin/files/bfgminer
-
 GIT TREE:
+
+https://github.com/tuaris/fbfgminer
+
+Upstream BFGMiner:
 
 https://github.com/luke-jr/bfgminer
 
 Bug reports:
 
-https://github.com/luke-jr/bfgminer/issues
+https://github.com/tuaris/fbfgminer/issues
 
 IRC Channel:
 
@@ -30,8 +28,8 @@ irc://irc.freenode.net/eligius
 
 License: GPLv3.  See COPYING for details.
 
-SEE ALSO README.ASIC, README.FPGA, README.GPU, README.RPC, AND README.scrypt FOR
-MORE INFORMATION ON EACH.
+SEE ALSO README.FreeBSD, README.ASIC, README.FPGA, README.GPU, README.RPC, AND
+README.scrypt FOR MORE INFORMATION ON EACH.
 
 ---
 

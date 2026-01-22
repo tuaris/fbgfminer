@@ -1,0 +1,88 @@
+# FBFG Miner - FreeBSD BFG Miner Fork
+
+FBFG Miner is a fork of BFGMiner with patches and modifications to build and
+run cleanly on FreeBSD.
+
+## Changes from upstream BFGMiner
+
+1. **jtag.c setbit conflict fix**: Renamed `setbit()` function to `jtag_setbit()`
+   to avoid conflict with FreeBSD's `setbit` macro defined in `<sys/param.h>`.
+
+2. **Submodule URLs**: Changed from `git://` to `https://` protocol for
+   compatibility with networks that block the git protocol.
+
+## Building on FreeBSD
+
+### Prerequisites
+
+Install the required packages:
+
+```sh
+pkg install git autoconf automake libtool pkgconf curl uthash jansson libevent
+```
+
+### Build Steps
+
+```sh
+# Clone the repository
+git clone https://github.com/tuaris/fbfgminer.git
+cd fbfgminer
+
+# Initialize submodules
+git submodule update --init --recursive
+
+# Generate configure script
+./autogen.sh
+
+# Configure with desired options (example enables Icarus/Block Erupter support)
+./configure --enable-icarus \
+    CPPFLAGS="-I/usr/local/include" \
+    LDFLAGS="-L/usr/local/lib"
+
+# Build
+make -j$(sysctl -n hw.ncpu)
+
+# Install (optional)
+sudo make install
+```
+
+### USB Device Access
+
+To access USB mining devices without root, add your user to the `dialer` group:
+
+```sh
+sudo pw groupmod dialer -m yourusername
+```
+
+Log out and back in for the group change to take effect.
+
+USB Block Erupters appear as `/dev/cuaU*` devices on FreeBSD.
+
+## Usage Example
+
+Connect to a stratum pool with a Block Erupter:
+
+```sh
+fbfgminer -S erupter:/dev/cuaU0 -o stratum+tcp://pool:3333 -u worker -p x
+```
+
+## Supported Hardware
+
+This fork has been tested with:
+- ASICMINER USB Block Erupter (erupter driver)
+
+Other BFGMiner-supported hardware should work but has not been tested on FreeBSD.
+
+## Original BFGMiner
+
+For general BFGMiner documentation, see the other README files:
+- README - General usage
+- README.ASIC - ASIC-specific information
+- README.FPGA - FPGA-specific information
+- README.RPC - RPC API documentation
+
+## License
+
+GPLv3. See COPYING for details.
+
+Original BFGMiner by Luke Dashjr and contributors.
